@@ -1,0 +1,9 @@
+To unzip a .tar.gz file, you can use the following command in a terminal window:
+
+tar -xvzf filename.tar.gz
+
+# Make sure that the location of the file to unzip is in the correct directory
+#check directory write following in cmd
+cd
+
+#If you want to change the current directory, you can use the 'cd' command followed by the path to the directory you want to change to.
