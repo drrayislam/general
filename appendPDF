@@ -1,0 +1,47 @@
+# make sure that working irectory is correct
+import os
+current_directory = os.getcwd()
+print("Current Working Directory:", current_directory)
+# Specify the directory you want to change to
+new_directory = "C:/Users/ray/Desktop/VA"  # Replace with your desired path
+# Change to the new directory
+os.chdir(new_directory)
+# Verify the change
+print("Current Working Directory:", os.getcwd())
+
+#install PyPDF2
+!pip install PyPDF2
+#import PyPDF2 library
+import PyPDF2
+
+# Combine pdf
+def list_pdf_files(directory):
+    return [file for file in os.listdir(directory) if file.endswith('.pdf')]
+
+def combine_pdfs(pdf_list, output_pdf):
+    pdf_writer = PyPDF2.PdfWriter()
+
+    for pdf in pdf_list:
+        pdf_reader = PyPDF2.PdfReader(pdf)
+        for page in range(len(pdf_reader.pages)):
+            pdf_writer.add_page(pdf_reader.pages[page])
+
+    with open(output_pdf, 'wb') as out_pdf:
+        pdf_writer.write(out_pdf)
+
+# Get current directory
+current_directory = os.getcwd()
+
+# List all PDF files in the current directory
+pdf_files = list_pdf_files(current_directory)
+print(f"PDF files to combine: {pdf_files}")
+
+# Output file name
+output_file = 'combined.pdf'
+
+# Combine the PDFs if there are any PDF files
+if pdf_files:
+    combine_pdfs(pdf_files, output_file)
+    print(f"Combined PDF created as '{output_file}' in the current directory")
+else:
+    print("No PDF files found in the current directory.")
