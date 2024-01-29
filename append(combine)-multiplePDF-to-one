@@ -1,4 +1,4 @@
-# make sure that working irectory is correct
+# make sure that working directory is correct
 import os
 current_directory = os.getcwd()
 print("Current Working Directory:", current_directory)
