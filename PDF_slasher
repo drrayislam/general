@@ -1,0 +1,29 @@
+!pip install PyPDF2
+import PyPDF2
+
+# Write function
+def reduce_pdf_to_200_pages(input_pdf_path, output_pdf_path):
+    # Open the existing PDF
+    with open(input_pdf_path, 'rb') as input_pdf_file:
+        reader = PyPDF2.PdfReader(input_pdf_file)
+        
+        # Create a new PDF writer
+        writer = PyPDF2.PdfWriter()
+        
+        # Check if the PDF has more than 200 pages
+        num_pages = min(200, len(reader.pages))
+
+        # Add the first 200 pages to the writer
+        for i in range(num_pages):
+            page = reader.pages[i]
+            writer.add_page(page)
+
+        # Write out the new PDF
+        with open(output_pdf_path, 'wb') as output_pdf_file:
+            writer.write(output_pdf_file)
+
+#Convert
+input_pdf = '/path/to/your/large/pdf.pdf' # Replace with your PDF path
+output_pdf = '/path/to/your/output/pdf.pdf' # Replace with your desired output path
+
+reduce_pdf_to_200_pages(input_pdf, output_pdf)
